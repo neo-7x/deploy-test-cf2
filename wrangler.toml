@@ -14,15 +14,20 @@ compatibility_flags = ["nodejs_compat"]
 binding = "POSTGRES"
 id = "dc6fb35f7e294fe5abafccacf7cf6b53"
 
-# Required secrets (BETTER_AUTH_SECRET, SYSTEM_ADMIN_EMAILS, DATABASE_URL for
-# build-time migrations) come from .env.example — the Deploy Button renders
-# them as encrypted secrets.
+# All env vars live here as plaintext [vars] with empty defaults so the
+# Deploy Button form renders them as plain text inputs (the user can see
+# what they're typing) rather than encrypted-secret masked inputs.
 #
-# Optional env vars live here as plaintext [vars] with empty defaults so the
-# Deploy Button form treats them as not-required (leaving them blank is OK).
-# Users who need OAuth or Resend will fill them in at deploy time and can
-# later rotate them to Secrets via the dashboard if desired.
+# Trade-off: CF's form won't enforce "required" on any of these — the user
+# could click through leaving DATABASE_URL / BETTER_AUTH_SECRET /
+# SYSTEM_ADMIN_EMAILS blank. Build-time/runtime assertions will catch this
+# later (drizzle-kit will fail on empty DATABASE_URL; better-auth will
+# throw on empty BETTER_AUTH_SECRET). Users who want their values to live
+# as actual Secrets can rotate them post-deploy via the dashboard.
 [vars]
+DATABASE_URL = ""
+BETTER_AUTH_SECRET = ""
+SYSTEM_ADMIN_EMAILS = ""
 GOOGLE_CLIENT_ID = ""
 GOOGLE_CLIENT_SECRET = ""
 GITHUB_CLIENT_ID = ""
