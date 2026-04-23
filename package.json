@@ -40,7 +40,7 @@
         "description": "Hyperdrive config pointing at your Postgres. [Create one first](https://developers.cloudflare.com/hyperdrive/) with `wrangler hyperdrive create`, then select it here."
       },
       "DATABASE_URL": {
-        "description": "**Build-time only.** Used during `pnpm migrate` to run schema migrations. Must point at the **same Postgres** as the `POSTGRES` Hyperdrive binding above. Free tier: [Neon](https://console.neon.tech/). At runtime the Worker reads through Hyperdrive."
+        "description": "**Build-time only.** Used during `pnpm migrate` to run schema migrations. Must point at the **same Postgres** as the `POSTGRES` Hyperdrive binding above. At runtime the Worker reads through Hyperdrive."
       },
       "BETTER_AUTH_SECRET": {
         "description": "Session / cookie encryption secret. **Required**. Generate with `openssl rand -hex 32` or use this [online generator](https://numbergenerator.org/random-32-digit-hex-codes-generator)."
