@@ -14,15 +14,23 @@ compatibility_flags = ["nodejs_compat"]
 binding = "POSTGRES"
 id = "dc6fb35f7e294fe5abafccacf7cf6b53"
 
-# BETTER_AUTH_SECRET is set via `wrangler secret put BETTER_AUTH_SECRET`.
-# DATABASE_URL is NOT needed on Cloudflare — the Hyperdrive binding above
-# replaces it.
+# Required secrets (BETTER_AUTH_SECRET, SYSTEM_ADMIN_EMAILS, DATABASE_URL for
+# build-time migrations) come from .env.example — the Deploy Button renders
+# them as encrypted secrets.
 #
-# SYSTEM_ADMIN_EMAILS controls who becomes admin on first sign-up. Default
-# falls back to `admin@local` when unset. Override to your own email via:
-#   wrangler secret put SYSTEM_ADMIN_EMAILS   (or set it as a plain var)
-# [vars]
-# SYSTEM_ADMIN_EMAILS = "you@example.com"
+# Optional env vars live here as plaintext [vars] with empty defaults so the
+# Deploy Button form treats them as not-required (leaving them blank is OK).
+# Users who need OAuth or Resend will fill them in at deploy time and can
+# later rotate them to Secrets via the dashboard if desired.
+[vars]
+GOOGLE_CLIENT_ID = ""
+GOOGLE_CLIENT_SECRET = ""
+GITHUB_CLIENT_ID = ""
+GITHUB_CLIENT_SECRET = ""
+AUTH_EMAIL_ENABLED = ""
+RESEND_API_KEY = ""
+RESEND_FROM = ""
+AUTH_EMAIL_VERIFICATION = ""
 
 [assets]
 directory = "./.output/public/"
