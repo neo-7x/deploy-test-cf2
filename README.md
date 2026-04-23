@@ -37,22 +37,23 @@ serving traffic.
 
 [![Deploy to Cloudflare](https://deploy.workers.cloudflare.com/button)](https://deploy.workers.cloudflare.com/?url=https://github.com/neo-7x/deploy-test)
 
-Cloudflare Workers reads `wrangler.toml` for bindings. You'll be prompted for
-the Hyperdrive binding and the required secrets (`BETTER_AUTH_SECRET`,
-`SYSTEM_ADMIN_EMAILS`) during the deploy flow. Create the Hyperdrive config
-first:
+Cloudflare Workers reads `wrangler.toml` for bindings and `package.json`'s
+`cloudflare.bindings.*.description` for the per-field help text on the deploy
+form. Create the Hyperdrive config first:
 
 ```
 wrangler hyperdrive create deploy-test \
   --connection-string="postgresql://USER:PASS@HOST:5432/DB"
 ```
 
-Then run the migrations once from your machine against the same Postgres
-(Workers Builds doesn't run migrations at deploy-time):
+Then click the button. You'll be prompted for the Hyperdrive binding (pick
+the one you just created), plus `DATABASE_URL`, `BETTER_AUTH_SECRET`,
+`SYSTEM_ADMIN_EMAILS`, and optional OAuth/Resend keys.
 
-```
-DATABASE_URL=postgresql://USER:PASS@HOST:5432/DB pnpm migrate
-```
+**`DATABASE_URL` on the Workers preset is build-time only** — it's used by
+`pnpm migrate` during the build step to apply schema migrations, and must
+point at the same Postgres as the Hyperdrive binding. At runtime the Worker
+reads through Hyperdrive.
 
 ### Docker
 
