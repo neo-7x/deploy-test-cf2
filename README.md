@@ -89,7 +89,7 @@ created with a matching email is promoted to `role=admin` on creation.
 
 ```
 pnpm install
-cp .env.example .env   # fill DATABASE_URL + BETTER_AUTH_SECRET + SYSTEM_ADMIN_EMAILS
+cp .env.template .env  # fill DATABASE_URL + BETTER_AUTH_SECRET + SYSTEM_ADMIN_EMAILS
 pnpm migrate
 pnpm dev               # http://localhost:3000
 ```
