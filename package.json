@@ -4,7 +4,8 @@
   "private": true,
   "description": "Minimal Nuxt 4 + Postgres + better-auth starter for validating one-click deploy flows (Vercel / Cloudflare Workers / Docker).",
   "scripts": {
-    "build": "pnpm migrate && nuxt build && mkdir -p .output/server/db && cp -r server/db/migrations .output/server/db/migrations",
+    "build": "nuxt build && mkdir -p .output/server/db && cp -r server/db/migrations .output/server/db/migrations",
+    "build:with-migrate": "pnpm migrate && pnpm build",
     "build:cf": "NITRO_PRESET=cloudflare-module nuxt build",
     "build:vercel": "NITRO_PRESET=vercel nuxt build",
     "dev": "nuxt dev",
