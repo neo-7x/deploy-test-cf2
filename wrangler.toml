@@ -1,4 +1,4 @@
-name = "deploy-test"
+name = "deploy-test-cf2"
 main = "./.output/server/index.mjs"
 # 2026-01-20+ auto-enables node:fs and adds built-in .sql text rule.
 compatibility_date = "2026-01-20"
